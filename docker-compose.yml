@@ -16,6 +16,10 @@ services:
       - letsencrypt:/etc/letsencrypt
     depends_on:
       - wordpress
+    logging:
+      options:
+        max-size: "100m"
+        max-file: "3"
   wordpress:
     image: wordpress
     restart: always
@@ -28,6 +32,10 @@ services:
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
     volumes:
       - wordpress:/var/www/html
+    logging:
+      options:
+        max-size: "100m"
+        max-file: "3"
 
   db:
     image: mysql:5.7
@@ -39,6 +47,10 @@ services:
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
     volumes:
       - db:/var/lib/mysql
+    logging:
+      options:
+        max-size: "100m"
+        max-file: "3"
 volumes:
   wordpress:
   db:
